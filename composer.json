@@ -1,0 +1,39 @@
+{
+    "name": "ozanakman/laravel-multilingual",
+    "description": "Simple localization for Laravel apps.",
+    "keywords": [
+        "ozan akman",
+        "localization",
+        "laravel",
+        "multilingual"
+    ],
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "cocur/slugify": "^3.1"
+    },
+    "authors": [
+        {
+            "name": "Ozan Akman",
+            "email": "info@ozanakman.com.tr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OzanAkman\\Multilingual\\": "src"
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OzanAkman\\Multilingual\\Providers\\MultilingualServiceProvider"
+            ],
+            "aliases": {
+                "Multilingual": "OzanAkman\\Multilingual\\Facades\\Multilingual"
+            }
+        }
+    }
+}
