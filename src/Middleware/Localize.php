@@ -95,11 +95,14 @@ class Localize
 
     /**
      * Get pre-selected locale from the user's choice.
+     * @param string|null $selectedLocale
      * @throws \Exception
      */
-    private function selectedLocale()
+    private function selectedLocale($selectedLocale = null)
     {
-        $this->selectedLocale = cookie('locale')->getValue() ?? default_locale()->code;
+        $this->selectedLocale = $selectedLocale
+            ? $selectedLocale
+            : (cookie('locale')->getValue() ?? default_locale()->code);
     }
 
     /**
@@ -128,24 +131,28 @@ class Localize
      * @param \Illuminate\Http\Request $request
      * @param Closure $next
      * @return mixed
+     * @throws \Exception
      */
     private function handleRedirect($request, Closure $next)
     {
         $requestLocale = $this->getLocaleFromRequest();
-        $redirectTo = $this->pattern === 'domain'
+
+        if ($requestLocale) {
+            $this->selectedLocale($requestLocale->code);
+        } else {
+            $redirectTo = $this->getRedirectUrl();
+            if (!$requestLocale || (!array_key_exists($requestLocale->code, $this->locales))) {
+                return redirect($redirectTo);
+            }
+        }
+        return $next($request);
+    }
+
+    private function getRedirectUrl()
+    {
+        return $this->pattern === 'domain'
             ? $this->buildDomainUrl()
             : $this->buildPathUrl();
-
-        if (!$requestLocale) {
-            return redirect($redirectTo);
-        }
-
-        if (!array_key_exists($requestLocale->code, $this->locales)) {
-
-            return redirect($redirectTo);
-        }
-
-        return $next($request);
     }
 
     /**
@@ -154,7 +161,7 @@ class Localize
      */
     private function buildDomainUrl()
     {
-        return $this->scheme . '://' . $this->selectedLocale . '.' . $this->httpHost;
+        return $this->scheme . '://' . $this->selectedLocale . '.' . $this->extractDomain($this->httpHost);
     }
 
     /**
@@ -163,7 +170,7 @@ class Localize
      */
     private function buildPathUrl()
     {
-        return $this->scheme . '://' . $this->httpHost . '/' . $this->selectedLocale;
+        return $this->scheme . '://' . $this->extractDomain($this->httpHost) . '/' . $this->selectedLocale;
     }
 
     /**
@@ -183,11 +190,10 @@ class Localize
      */
     private function getLocaleFromDomain()
     {
-        $host = $this->httpHost;
-        preg_match('/^[A-Za-z]{2}/', $host, $code, 'PREG_OFFSET_CAPTURE', 0);
+        $code = $this->extractSubdomain();
 
         if ($code) {
-            $this->getLocale($code);
+            return $this->getLocale($code);
         }
 
         return null;
@@ -211,5 +217,29 @@ class Localize
     private function getLocale($code)
     {
         return Locale::where('code', $code)->where('enabled', 1)->first();
+    }
+
+    /**
+     * Extract main domain from http host
+     * @param string $host
+     * @return mixed
+     */
+    private function extractDomain($host = null)
+    {
+        $host = $host ?? $this->httpHost;
+        $regexPattern = '/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i';
+        return preg_match($regexPattern, $host, $matches)
+            ? $matches['domain']
+            : $host;
+    }
+
+    /**
+     * Extract first subdomain from http host.
+     * @return string
+     */
+    private function extractSubdomain()
+    {
+        $domain = $this->extractDomain();
+        return rtrim(strstr($this->httpHost, $domain, true), '.');
     }
 }

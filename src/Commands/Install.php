@@ -38,33 +38,32 @@ class Install extends Command
      */
     public function handle()
     {
-        $this->alert('Starting to initialize Multilingual!');
         $this->publish();
         $this->migrate();
         $this->insertLanguages();
-        $this->alert('Multilingual successfully installed!');
-        $this->comment('Now, add \OzanAkman\Multilingual\Middleware\Localize::class to your Kernel!');
+        $this->info('Multilingual successfully installed!');
+        $this->info('Now, add \OzanAkman\Multilingual\Middleware\Localize::class to Kernel!');
     }
 
     private function publish()
     {
-        $this->info('Publishing config and migrations...');
-        $this->call('vendor:publish', [
+        $this->comment('Publishing config, views and migrations...');
+        $this->callSilent('vendor:publish', [
             '--provider' => 'OzanAkman\Multilingual\Providers\MultilingualServiceProvider',
         ]);
     }
 
     private function migrate()
     {
-        $this->info('Running migrations...');
-        $this->call('migrate', [
+        $this->comment('Running migrations...');
+        $this->callSilent('migrate', [
             '--path' => '/database/migrations/multilingual/'
         ]);
     }
 
     private function insertLanguages()
     {
-        $this->info('Inserting a dummy language...');
+        $this->comment('Inserting the first language: English, en...');
         $locale = new Locale();
         $locale->code = 'en';
         $locale->name = 'English';
