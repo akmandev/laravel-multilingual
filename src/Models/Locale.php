@@ -32,4 +32,13 @@ class Locale extends Model
      * @var string
      */
     protected $primaryKey = 'code';
+
+    /**
+     * Cast attributes.
+     * @var array
+     */
+    protected $casts = [
+        'enabled' => 'boolean',
+        'default' => 'boolean',
+    ];
 }

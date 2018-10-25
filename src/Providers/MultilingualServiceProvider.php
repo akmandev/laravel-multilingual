@@ -28,12 +28,10 @@ class MultilingualServiceProvider extends ServiceProvider
 
         $this->publishesMigration('CreateLocalesTable', 'create_locales_table', 1);
         $this->publishesMigration('CreateTranslationsTable', 'create_translations_table', 2);
-        $this->loadViewsFrom(self::PACKAGE_DIR . '/resource/views', 'multilingual');
         $this->publishes([
             self::PACKAGE_DIR . '/config/multilingual.php' => config_path('multilingual.php'),
-            self::PACKAGE_DIR . '/resources/views' => resource_path('views/vendor/multilingual'),
         ]);
-        $this->bladeAliases();
+        $this->bladeDirectives();
         $this->translationObserver();
 
         require_once self::PACKAGE_DIR . '/src/Support/helpers.php';
@@ -70,9 +68,17 @@ class MultilingualServiceProvider extends ServiceProvider
     /**
      * Register Blade aliases.
      */
-    private function bladeAliases()
+    private function bladeDirectives()
     {
-        Blade::include('multilingual::locales');
+        Blade::directive('forEachLocale', function ($expression) {
+            $expression = empty($expression) ? '$locale' : $expression;
+
+            return "<?php foreach(locales() as {$expression}){?>";
+        });
+
+        Blade::directive('endForEachLocale', function () {
+            return "<?php } ?>";
+        });
     }
 
     /**

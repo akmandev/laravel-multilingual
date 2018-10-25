@@ -47,7 +47,7 @@ class Install extends Command
 
     private function publish()
     {
-        $this->comment('Publishing config, views and migrations...');
+        $this->comment('Publishing config and migrations...');
         $this->callSilent('vendor:publish', [
             '--provider' => 'OzanAkman\Multilingual\Providers\MultilingualServiceProvider',
         ]);
