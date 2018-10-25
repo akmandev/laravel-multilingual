@@ -1,6 +1,5 @@
-<p align="center">
-<h1>Multilingual Laravel :globe_with_meridians:</h1>
-</p>
+# [WIP] Multilingual Laravel :globe_with_meridians:</h1>
+
 
 ## Introduction
 Multilingual is a localization package for Laravel apps. It has built-in methods to make localization simple. It aims to give you developing speed and not to worry about locales.
