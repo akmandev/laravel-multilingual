@@ -109,8 +109,6 @@ You can use this directive as much as you want. Locales are cached behind scenes
 ```bash 
 php artisan multilingual:add {code} {name} {native name}
 ```
-
-Example of the command:
 ```bash 
 php artisan multilingual:add tr Turkish Türkçe
 ```
@@ -121,7 +119,8 @@ php artisan multilingual:remove tr
 ```
 > Be careful, this command will delete all translations that belongs to the locale.
 
-- **Manually,** you can use Locale model to add/edit/remove a locale. 
+
+**Manually,** you can use Locale model to add/edit/remove a locale. 
 
 ## Translations
 
