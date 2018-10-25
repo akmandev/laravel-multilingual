@@ -1,5 +1,5 @@
 <p align="center">
-# Multilingual Laravel :globe_with_meridians:
+<h1>Multilingual Laravel :globe_with_meridians:</h1>
 </p>
 
 ## Introduction
