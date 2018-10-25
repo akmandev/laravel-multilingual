@@ -80,6 +80,23 @@ return [
   ```
   
   After all, it's just a shortcut.
+  
+## Blade Directive
+
+You can easily handle locale based components like locale selection dropdown or multilingual content editor, etc.. 
+
+You can use this directive as much as you want. Locales are cached behind scenes. So, no need to worry.
+
+```blade
+@forEachLocale($item)
+{{ $item->code }}
+{{ $item->name }}
+{{ $item->native_name }}
+{{ $item->enabled }}
+{{ $item->default }}
+@endForEachLocale
+
+```
 
 ## Models
 
@@ -99,9 +116,36 @@ php artisan multilingual:add tr Turkish Türkçe
 
 ## Translations
 
+Add `HasMultilingualContent` trait to add your model files to go on.
+
+- Translating model to other locales:
+```php
+$model->translate('en', [
+    'column' => 'translated_version'
+]);
+```
+
+- Removing translation:
+```php 
+$model->removeTranslation('en');
+```
+
+* Handling translation slugs is so easy. You just need to add `slugSource()` method to your main model. 
+
+```php
+class ExampleModel extends Model
+{
+    public function slugSource()
+    {
+        // Column
+        return 'title';
+    }
+}
+```
+
+And now when you add a translation Multilingual will generate `slug` from `title` column by `cocur/slugify` package.
 
 ## Testing
-
 Multilingual uses `Orchestra\Testbench` to run tests.
 
 ```bash
