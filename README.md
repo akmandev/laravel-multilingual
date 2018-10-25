@@ -123,7 +123,7 @@ php artisan multilingual:remove tr
 
 ## Translations
 
-Add `HasMultilingualContent` trait to add your model files to go on.
+Add `HasMultilingualContent` trait to your model files.
 
 - Translating model to other locales:
 ```php
