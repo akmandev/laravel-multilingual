@@ -4,6 +4,8 @@
 ## Introduction
 Multilingual is a localization package for Laravel apps. It has built-in methods to make localization simple. It aims to give you developing speed and not to worry about locales.
 
+This package created by Ozan Akman for ![Diffea](https://www.diffea.com/wp-content/uploads/2018/10/diffea-colored-logo.svg)
+
 - Handling redirects easily (domain or path based)
 - Extended router class for localized routes
 - @forEachLocale Blade directive
