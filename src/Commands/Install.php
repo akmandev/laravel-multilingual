@@ -2,7 +2,6 @@
 
 namespace OzanAkman\Multilingual\Commands;
 
-use Illuminate\Console\Command;
 use OzanAkman\Multilingual\Models\Locale;
 
 class Install extends Command
@@ -20,16 +19,6 @@ class Install extends Command
      * @var string
      */
     protected $description = 'Setups localization resources for the app.';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.

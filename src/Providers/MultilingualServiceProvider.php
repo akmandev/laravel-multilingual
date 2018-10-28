@@ -5,9 +5,12 @@ namespace OzanAkman\Multilingual\Providers;
 use DateTime;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use OzanAkman\Multilingual\Commands\Add;
 use OzanAkman\Multilingual\Support\Router;
+use OzanAkman\Multilingual\Commands\Remove;
 use OzanAkman\Multilingual\Commands\Install;
 use OzanAkman\Multilingual\Models\Translation;
+use OzanAkman\Multilingual\Commands\SetDefault;
 use OzanAkman\Multilingual\Observers\TranslationObserver;
 
 class MultilingualServiceProvider extends ServiceProvider
@@ -23,6 +26,9 @@ class MultilingualServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Install::class,
+                Add::class,
+                Remove::class,
+                SetDefault::class,
             ]);
         }
 
