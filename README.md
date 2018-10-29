@@ -42,7 +42,7 @@ when you select `domain` as the pattern. Localized url would be something like t
 when you select `path` as the pattern. Localized url would be something like this: 
 `domain.com/en` or `domain.com/tr`.
 
-Other options is just for customizing *middleware*. You can either use `OzanAkman\Multilingual\Middleware\Localize` which is handling redirects or create your own.
+The other option is just for customizing *middleware*. You can either use `OzanAkman\Multilingual\Middleware\Localize` which is handling redirects or create your own.
 
 ### Content of the published config file
 ```php

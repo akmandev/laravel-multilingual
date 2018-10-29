@@ -25,6 +25,7 @@ class SetDefault extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Exception
      */
     public function handle()
     {
@@ -37,5 +38,6 @@ class SetDefault extends Command
         $locale->save();
 
         $this->info("Locale {$code} {$locale->name} set as default successfully!");
+        $this->invalidateCache();
     }
 }

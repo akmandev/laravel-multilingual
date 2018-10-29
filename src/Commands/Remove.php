@@ -24,6 +24,7 @@ class Remove extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Exception
      */
     public function handle()
     {
@@ -39,6 +40,7 @@ class Remove extends Command
 
         $this->info("Locale {$locale->code} {$locale->name} deleted successfully!");
         $locale->delete();
+        $this->invalidateCache();
     }
 
 }

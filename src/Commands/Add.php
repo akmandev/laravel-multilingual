@@ -44,6 +44,7 @@ class Add extends Command
         $locale->enabled = (bool)$this->option('enabled');
         $locale->save();
 
+        $this->invalidateCache();
         $this->info("Locale {$locale->code} {$locale->name} added successfully!");
     }
 }
