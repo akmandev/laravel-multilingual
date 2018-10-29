@@ -130,6 +130,12 @@ php artisan multilingual:remove tr
 
 Add `OzanAkman\Multilingual\Models\Traits\HasMultilingualContent` trait to your model files.
 
+
+- Getting translated version of the model:
+```php
+$model->translate('en');
+```
+
 - Translating model to other locales:
 ```php
 $model->translate('en', [
