@@ -123,7 +123,7 @@ class Localize
      */
     private function methodName($pattern)
     {
-        return 'build' . studly_case($pattern) . 'Url';
+        return 'build'.studly_case($pattern).'Url';
     }
 
     /**
@@ -141,10 +141,11 @@ class Localize
             $this->selectedLocale($requestLocale->code);
         } else {
             $redirectTo = $this->getRedirectUrl();
-            if (!$requestLocale || (!array_key_exists($requestLocale->code, $this->locales))) {
+            if (! $requestLocale || (! array_key_exists($requestLocale->code, $this->locales))) {
                 return redirect($redirectTo);
             }
         }
+
         return $next($request);
     }
 
@@ -161,7 +162,7 @@ class Localize
      */
     private function buildDomainUrl()
     {
-        return $this->scheme . '://' . $this->selectedLocale . '.' . $this->extractDomain($this->httpHost);
+        return $this->scheme.'://'.$this->selectedLocale.'.'.$this->extractDomain($this->httpHost);
     }
 
     /**
@@ -170,11 +171,11 @@ class Localize
      */
     private function buildPathUrl()
     {
-        return $this->scheme . '://' . $this->extractDomain($this->httpHost) . '/' . $this->selectedLocale;
+        return $this->scheme.'://'.$this->extractDomain($this->httpHost).'/'.$this->selectedLocale;
     }
 
     /**
-     * Get locale by the current request
+     * Get locale by the current request.
      * @return mixed|null|\OzanAkman\Multilingual\Models\Locale
      */
     private function getLocaleFromRequest()
@@ -206,6 +207,7 @@ class Localize
     private function getLocaleFromPath()
     {
         $code = request()->segment(1);
+
         return $this->getLocale($code);
     }
 
@@ -220,7 +222,7 @@ class Localize
     }
 
     /**
-     * Extract main domain from http host
+     * Extract main domain from http host.
      * @param string $host
      * @return mixed
      */
@@ -228,6 +230,7 @@ class Localize
     {
         $host = $host ?? $this->httpHost;
         $regexPattern = '/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i';
+
         return preg_match($regexPattern, $host, $matches)
             ? $matches['domain']
             : $host;
@@ -240,6 +243,7 @@ class Localize
     private function extractSubdomain()
     {
         $domain = $this->extractDomain();
+
         return rtrim(strstr($this->httpHost, $domain, true), '.');
     }
 }

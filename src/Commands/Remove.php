@@ -42,5 +42,4 @@ class Remove extends Command
         $locale->delete();
         $this->invalidateCache();
     }
-
 }

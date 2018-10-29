@@ -5,8 +5,7 @@ namespace OzanAkman\Multilingual\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Locale
- * @package OzanAkman\Multilingual\Models
+ * Class Locale.
  * @property $code
  * @property $name
  * @property $native_name

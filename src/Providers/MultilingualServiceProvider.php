@@ -15,7 +15,7 @@ use OzanAkman\Multilingual\Observers\TranslationObserver;
 
 class MultilingualServiceProvider extends ServiceProvider
 {
-    const PACKAGE_DIR = __DIR__ . '/../..';
+    const PACKAGE_DIR = __DIR__.'/../..';
 
     /**
      * Bootstrap services.
@@ -35,12 +35,12 @@ class MultilingualServiceProvider extends ServiceProvider
         $this->publishesMigration('CreateLocalesTable', 'create_locales_table', 1);
         $this->publishesMigration('CreateTranslationsTable', 'create_translations_table', 2);
         $this->publishes([
-            self::PACKAGE_DIR . '/config/multilingual.php' => config_path('multilingual.php'),
+            self::PACKAGE_DIR.'/config/multilingual.php' => config_path('multilingual.php'),
         ]);
         $this->bladeDirectives();
         $this->translationObserver();
 
-        require_once self::PACKAGE_DIR . '/src/Support/helpers.php';
+        require_once self::PACKAGE_DIR.'/src/Support/helpers.php';
     }
 
     /**
@@ -49,7 +49,7 @@ class MultilingualServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(self::PACKAGE_DIR . '/config/multilingual.php', 'multilingual');
+        $this->mergeConfigFrom(self::PACKAGE_DIR.'/config/multilingual.php', 'multilingual');
         $this->app['router']->mixin(new Router);
     }
 
@@ -62,10 +62,10 @@ class MultilingualServiceProvider extends ServiceProvider
      */
     protected function publishesMigration(string $className, string $fileName, int $timestampSuffix)
     {
-        if (!class_exists($className)) {
-            $timestamp = (new DateTime())->format('Y_m_d_His') . $timestampSuffix;
-            $stub = self::PACKAGE_DIR . "/database/migrations/{$fileName}.php.stub";
-            $file = database_path('migrations/multilingual/' . $timestamp . "_{$fileName}.php");
+        if (! class_exists($className)) {
+            $timestamp = (new DateTime())->format('Y_m_d_His').$timestampSuffix;
+            $stub = self::PACKAGE_DIR."/database/migrations/{$fileName}.php.stub";
+            $file = database_path('migrations/multilingual/'.$timestamp."_{$fileName}.php");
 
             $this->publishes([$stub => $file], 'migrations');
         }
@@ -83,7 +83,7 @@ class MultilingualServiceProvider extends ServiceProvider
         });
 
         Blade::directive('endForEachLocale', function () {
-            return "<?php } ?>";
+            return '<?php } ?>';
         });
     }
 

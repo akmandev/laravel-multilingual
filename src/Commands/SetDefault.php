@@ -20,7 +20,6 @@ class SetDefault extends Command
      */
     protected $description = 'Sets a locale to default';
 
-
     /**
      * Execute the console command.
      *

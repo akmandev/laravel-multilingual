@@ -5,8 +5,7 @@ namespace OzanAkman\Multilingual\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Translation
- * @package OzanAkman\Multilingual\Models
+ * Class Translation.
  * @property $id
  * @property $content_id
  * @property $locale
@@ -19,6 +18,6 @@ use Illuminate\Database\Eloquent\Model;
 class Translation extends Model
 {
     protected $casts = [
-        'content' => 'array'
+        'content' => 'array',
     ];
 }

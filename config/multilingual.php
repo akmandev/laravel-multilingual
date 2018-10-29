@@ -10,7 +10,7 @@ return [
      */
     'pattern' => 'path',
 
-    /**
+    /*
      * Localization middleware to handle user redirects.
      */
     'middleware' => OzanAkman\Multilingual\Middleware\Localize::class,
