@@ -41,7 +41,7 @@ class Add extends Command
         $locale->code = $args['code'];
         $locale->name = $args['name'];
         $locale->native_name = $args['native_name'];
-        $locale->enabled = (bool)$this->option('enabled');
+        $locale->enabled = (bool) $this->option('enabled');
         $locale->save();
 
         $this->invalidateCache();
