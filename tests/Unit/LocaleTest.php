@@ -7,14 +7,14 @@ use OzanAkman\Multilingual\Tests\TestCase;
 
 class LocaleTest extends TestCase
 {
-    CONST PROJECT_DIR = __DIR__ . '/../..';
+    const PROJECT_DIR = __DIR__.'/../..';
 
     protected $locale;
 
     public function setUp()
     {
         parent::setUp();
-        $this->withFactories(self::PROJECT_DIR . '/database/factories');
+        $this->withFactories(self::PROJECT_DIR.'/database/factories');
         $this->locale = factory(Locale::class)->make();
     }
 

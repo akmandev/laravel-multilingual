@@ -5,8 +5,7 @@ namespace OzanAkman\Multilingual\Models\Traits;
 use OzanAkman\Multilingual\Models\Translation;
 
 /**
- * Trait HasMultilingualContent
- * @package OzanAkman\Multilingual\Traits
+ * Trait HasMultilingualContent.
  * @method HasMultilingualContent hasOne($model, $foreign_key)
  * @method HasMultilingualContent where($column, $value)
  */
@@ -20,7 +19,7 @@ trait HasMultilingualContent
      */
     public function translate($locale, $attributes = [])
     {
-        if (!$attributes) {
+        if (! $attributes) {
             return $this->hasOne(Translation::class, 'content_id')
                 ->where('locale', $locale);
         }

@@ -3,7 +3,7 @@
 use OzanAkman\Multilingual\Models\Locale;
 use OzanAkman\Multilingual\Models\Enums\LocaleStatus;
 
-if (!function_exists('locales')) {
+if (! function_exists('locales')) {
     /**
      * Get locales from the database.
      * @throws Exception
@@ -26,10 +26,9 @@ if (!function_exists('locales')) {
     }
 }
 
-
-if (!function_exists('default_locale')) {
+if (! function_exists('default_locale')) {
     /**
-     * Get default locale
+     * Get default locale.
      * @throws Exception
      */
     function default_locale()

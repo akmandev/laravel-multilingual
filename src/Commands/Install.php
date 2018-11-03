@@ -46,7 +46,7 @@ class Install extends Command
     {
         $this->comment('Running migrations...');
         $this->callSilent('migrate', [
-            '--path' => '/database/migrations/multilingual/'
+            '--path' => '/database/migrations/multilingual/',
         ]);
     }
 

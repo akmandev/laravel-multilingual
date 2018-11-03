@@ -19,7 +19,7 @@ class Command extends BaseCommand
         $locale = Locale::where('code', $code)->first();
 
         if ($errorOn === Code::CODE_DOES_NOT_EXIST) {
-            if (!$locale) {
+            if (! $locale) {
                 $this->error("Locale {$code} doesn't exist!");
                 exit();
             }
