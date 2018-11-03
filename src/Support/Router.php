@@ -20,26 +20,9 @@ class Router
                 $routes = $args[0];
             }
 
-            $attributes = array_merge($attributes, Router::mapAttributesByPattern());
+            $attributes = array_merge($attributes, RouterHelper::mapAttributesByPattern());
+
             $this->group($attributes, $routes);
         };
-    }
-
-    /**
-     * Generate attributes by the given pattern.
-     * @return array
-     */
-    public static function mapAttributesByPattern()
-    {
-        $pattern = config('multilingual.pattern');
-        $attributes = [];
-
-        if ($pattern === 'domain') {
-            $attributes['domain'] = '{domain}.' . env('APP_URL');
-        } else if ($pattern === 'path') {
-            $attributes['prefix'] = '{lang?}';
-        }
-
-        return $attributes;
     }
 }
