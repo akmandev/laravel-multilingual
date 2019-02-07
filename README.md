@@ -11,10 +11,6 @@ This package created by Ozan Akman
 - Blade directive @forEachLocale
 - Highly customizable
 
-### Sponsors
-![Diffea](https://www.diffea.com/wp-content/uploads/2018/10/diffea-colored-logo.svg)
-
-
 ## Installation
 You may use Composer to install Multilingual into your Laravel project:
 ```sh 
