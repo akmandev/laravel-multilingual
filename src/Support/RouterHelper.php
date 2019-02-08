@@ -14,8 +14,8 @@ class RouterHelper
         $attributes = [];
 
         if ($pattern === 'domain') {
-            $attributes['domain'] = '{domain}.' . env('APP_URL');
-        } else if ($pattern === 'path') {
+            $attributes['domain'] = '{domain}.'.env('APP_URL');
+        } elseif ($pattern === 'path') {
             $attributes['prefix'] = '{lang?}';
         }
 
